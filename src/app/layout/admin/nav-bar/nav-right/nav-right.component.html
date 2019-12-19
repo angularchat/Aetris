@@ -1,0 +1,187 @@
+<ul class="navbar-nav">
+    <li>
+        <div class="dropdown" ngbDropdown [placement]="['bottom-left', 'bottom-right']">
+            <a ngbDropdownToggle href="javascript:" data-toggle="dropdown"><i class="icon feather icon-bell"></i></a>
+            <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right notification">
+                <div class="noti-head">
+                    <h6 class="d-inline-block m-b-0">Notifications</h6>
+                    <div class="float-right">
+                        <a href="javascript:" class="m-r-10">mark as read</a>
+                        <a href="javascript:">clear all</a>
+                    </div>
+                </div>
+                <ul class="noti-body">
+                    <li class="n-title">
+                        <p class="m-b-0">NEW</p>
+                    </li>
+                    <li class="notification">
+                        <div class="media">
+                            <img class="img-radius" src="assets/images/user/avatar-1.jpg" alt="Generic placeholder image">
+                            <div class="media-body">
+                                <p><strong>John Doe</strong><span class="n-time text-muted"><i
+                      class="icon feather icon-clock m-r-10"></i>30 min</span></p>
+                                <p>New ticket Added</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="n-title">
+                        <p class="m-b-0">EARLIER</p>
+                    </li>
+                    <li class="notification">
+                        <div class="media">
+                            <img class="img-radius" src="assets/images/user/avatar-2.jpg" alt="Generic placeholder image">
+                            <div class="media-body">
+                                <p><strong>Joseph William</strong><span class="n-time text-muted"><i
+                      class="icon feather icon-clock m-r-10"></i>30 min</span></p>
+                                <p>Prchace New Theme and make payment</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="notification">
+                        <div class="media">
+                            <img class="img-radius" src="assets/images/user/avatar-3.jpg" alt="Generic placeholder image">
+                            <div class="media-body">
+                                <p><strong>Sara Soudein</strong><span class="n-time text-muted"><i
+                      class="icon feather icon-clock m-r-10"></i>30 min</span></p>
+                                <p>currently login</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="noti-footer">
+                    <a href="javascript:">show all</a>
+                </div>
+            </div>
+        </div>
+    </li>
+    <!-- <li (click)="this.visibleUserList = !this.visibleUserList;"><a href="javascript:" class="displayChatbox"><i class="icon feather icon-mail"></i></a></li> -->
+    <!-- (click)="getDetails();" -->
+    <li>
+        <div class="dropdown drp-user" ngbDropdown [placement]="['bottom-left', 'bottom-right']">
+            <a href="javascript:" ngbDropdownToggle data-toggle="dropdown">
+                <i class="icon feather icon-settings"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right profile-notification" ngbDropdownMenu>
+                <div class="pro-head">
+                    <img src="{{details.cover_image_medium}}"  (click)="enlargeimage()" class="img-radius" alt="User-Profile-Image" (error)="noImg(details.cover_image_medium)">
+                    <span>{{details?.name}}</span>
+                    <a href="javascript:" class="dud-logout" title="Logout" (click)="logoutConfirm.show();">
+                        <i class="feather icon-log-out"></i>
+                    </a>
+                </div>
+                <ul class="pro-body">
+                    <!-- <li ><a href="javascript:" class="dropdown-item"><i
+                class="feather icon-settings"></i> Settings</a></li> -->
+                    <li (click)="editProfileadmin.show()"> <a href="javascript:" class="dropdown-item" (click)="getUserDetails();"><i class="feather icon-user"></i> Profile</a></li>
+                    <!-- <li><a href="javascript:" class="dropdown-item"><i class="feather icon-mail"></i> My Messages</a></li> -->
+                    <!-- <li><a href="javascript:" class="dropdown-item"><i class="feather icon-lock"></i> Lock Screen</a></li> -->
+                </ul>
+            </div>
+        </div>
+    </li>
+</ul>
+<section class="header-user-list" *ngIf="visibleUserList && !this.dattaConfig['rtl-layout']" [ngClass]="{'open': visibleUserList}" [@slideInOutLeft]>
+    <app-chat-user-list (onChatToggle)="onChatToggle($event)" (onChatCollapse)="this.visibleUserList = !this.visibleUserList; this.chatMessage = false;"></app-chat-user-list>
+</section>
+
+<section class="header-chat" *ngIf="chatMessage && !this.dattaConfig['rtl-layout']" [ngClass]="{'open': chatMessage}" [@slideInOutLeft]>
+    <app-chat-msg (onChatToggle)="this.chatMessage = !this.chatMessage" [friendId]="friendId"></app-chat-msg>
+</section>
+
+<section class="header-user-list" *ngIf="visibleUserList && this.dattaConfig['rtl-layout']" [ngClass]="{'open': visibleUserList}" [@slideInOutRight]>
+    <app-chat-user-list (onChatToggle)="onChatToggle($event)" (onChatCollapse)="this.visibleUserList = !this.visibleUserList; this.chatMessage = false;"></app-chat-user-list>
+</section>
+
+<section class="header-chat" *ngIf="chatMessage && this.dattaConfig['rtl-layout']" [ngClass]="{'open': chatMessage}" [@slideInOutRight]>
+    <app-chat-msg (onChatToggle)="this.chatMessage = !this.chatMessage" [friendId]="friendId"></app-chat-msg>
+</section>
+
+<!-- settings editModal starts -->
+<app-ui-modal #editProfileadmin [dialogClass]="modal-dialog-centered" class="editModal">
+
+    <div class="app-modal-header">
+        <h5 class="modal-title">Edit Profile</h5>
+        <button type="button" class="close basic-close" id="closemodal" data-dismiss="modal" aria-label="Close" (click)="editProfileadmin.hide()"><span aria-hidden="true">&times;</span></button>
+    </div>
+
+    <div class="app-modal-body">
+        <form [formGroup]="updategroupForm"  #f="ngForm"  (ngSubmit)="onSubmit(updategroupForm)">
+            <div class="col-md-12 edit">
+                <div class="col-md-8">
+
+                    <div class="form-group">
+                        <input type="text" formControlName="name" [(ngModel)]="details.name" class="mb-3 form-control form-control-lg" type="text" placeholder="Group Name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+                        <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                            <div *ngIf="f.name.errors.required">Name is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+                        <input class="mb-3 form-control form-control-lg" type="number" [(ngModel)]="details.mobile_number" formControlName="phonum" placeholder="Contact Number" [ngClass]="{ 'is-invalid': submitted && f.phonum.errors }">
+                        <div *ngIf="submitted && f.phonum.errors" class="invalid-feedback">
+                            <div *ngIf="f.phonum.errors.required">Mobile Number is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+                        <input class="mb-3 form-control form-control-lg" type="email" [(ngModel)]="details.email" formControlName="email" placeholder="Address" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                            <div *ngIf="f.email.errors.required">Email is required</div>
+                            <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                        </div>
+                    </div>
+                    <div class="guest-in">
+                        <input type="checkbox" id="guest" name="guest" [checked]="GuestType" (change)="guestChange($event)">
+                        <label for="defaultCheck">Guest</label>
+                    </div>
+                    <div class="save-btn">
+                        <button class="btn btn-primary">Save changes</button></div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="Clear-btn" *ngIf="details.cover_image_medium != null && details.cover_image_medium != ''">
+                        <button type="button" class="btn btn-primary" (click)="clearimage(details)">Clear</button>
+                    </div>
+                    <div class="wrapper">
+                        <div class="file-upload" *ngIf="details.cover_image_medium == null || details.cover_image_medium == ''">
+                            <input type="file" name="image" accept=".png, .jpg, .jpeg" (change)="onSelectFile($event)" />
+                            <i class="fa fa-user-circle"></i>
+                        </div>
+                        <img id="myImg" [src]="details.cover_image_medium"  (click)="enlargeimage()" class="hover-shadow cursor" (error)="noImg(details.cover_image_medium);" *ngIf="details.cover_image_medium != null && details.cover_image_medium != ''" />
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- <ng-container *ngIf="isenlargeimage == true">
+        <div class="imageenlarge">
+            <img id="myImg" [src]="details.cover_image_medium"class="hover-shadow cursor" (error)="noImg(details.cover_image_medium);" *ngIf="details.cover_image_medium != null && details.cover_image_medium != ''" />
+            <button type="button"(click)="closeenlargimg()" class="close basic-close"><span>&times;</span></button>
+         
+        </div>
+    </ng-container> -->
+    </div>
+
+
+</app-ui-modal>
+<!-- settings model ends -->
+      <ng-container *ngIf="isenlargeimage == true">
+          <div class="lightbox">
+        <div class="imageenlarge">
+            <img id="myImg" [src]="details.cover_image_medium"class="hover-shadow cursor" (error)="noImg(details.cover_image_medium);" *ngIf="details.cover_image_medium != null && details.cover_image_medium != ''" />
+            <button type="button"(click)="closeenlargimg()" class="closelightbox basic-close"><span>&times;</span></button>
+         
+        </div>
+    </div>
+    </ng-container>
+<app-ui-modal #logoutConfirm [dialogClass]="modal-dialog-centered" class="delete">
+    <div class="app-modal-header">
+        <h5 class="modal-title">
+            Are you want to do logout ?
+        </h5>
+        <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="logoutConfirm.hide();"><span aria-hidden="true">&times;</span></button>
+    </div>
+    <div class="app-modal-body">
+        <a (click)="logout();">Yes</a>
+        <a (click)="logoutConfirm.hide();">No</a>
+    </div>
+</app-ui-modal>

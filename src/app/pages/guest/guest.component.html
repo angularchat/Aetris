@@ -1,0 +1,82 @@
+
+   <div class="row">
+    <div class="col-sm-12" *ngIf="!loading">
+     <button type="button" class="btn btn-primary model-btn" (click)="modalDefault.show()">Add Guest</button>
+       <app-card cardTitle="Guests" [options]="false">
+        <div class="table-responsive">
+          <table datatable class="table table-striped row-border table-hover">
+            <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Mobile Number</th>
+              <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor ="let data of guestsData">
+                <td>{{data.id}}</td>
+                <td> 
+                  <span *ngIf="data.name != '' && data.name != null;else notshow">{{data.name}}</span> 
+                  <ng-template #notshow> --- </ng-template>
+                </td>
+                <td> 
+                  <span *ngIf="data.name != '' && data.name != null;else notshow">{{data.name}}</span> 
+                  <ng-template #notshow> --- </ng-template>
+                </td>
+                <!-- <td>
+                  <span *ngIf="data?.shifthours != '' && data?.shifthours != null;else notshow">{{data.shifthours}}</span>
+                  <ng-template #notshow> --- </ng-template> 
+                </td> -->
+                <td> 
+                  <span >Edit</span> 
+                </td>
+              </tr>
+            
+            </tbody>
+         
+          </table>
+        </div>
+      </app-card>
+    </div>
+   
+  </div>
+
+     <app-ui-modal #modalDefault [dialogClass]="modal-dialog-centered">
+        <div class="app-modal-header">
+          <h5 class="modal-title">Add Guest</h5>
+          <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="modalDefault.hide()"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="app-modal-body">
+            <div class="col-md-12">
+                <div class="Clear-btn" *ngIf="url != null && url != ''">
+                    <button type="button" class="btn btn-primary" (click)="clearimage()">Clear</button>
+                  </div>
+                <div class="wrapper">
+                
+                    <div class="file-upload"  *ngIf="url == null || url == ''">
+                      <input type="file" (change)="onSelectFile($event)" />
+                      <i class="fa fa-user-circle"></i>
+                    </div>
+                    <img [src]="url" *ngIf="url != null && url != ''"/>
+                  </div>
+                <input class="mb-3 form-control form-control-lg" type="text" placeholder="Name">
+                <input class="mb-3 form-control" type="text" placeholder="Mobile Number">
+                <input class="mb-3 form-control form-control-sm" type="text" placeholder="Email">
+                <input class="mb-3 form-control form-control-sm" type="text" placeholder="Company Name">
+               
+    
+            </div>
+        </div>
+        <div class="app-modal-footer save-btn">
+          <button type="button" class="btn btn-primary">Save changes</button>
+       </div>
+      
+    </app-ui-modal>
+<!-- loader -->
+    <div class="loader"  *ngIf="loading">
+      <div class="container">
+        <div class="triangle"></div>
+        <div class="triangle"></div>
+      </div>
+    </div>

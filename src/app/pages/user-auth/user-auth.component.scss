@@ -1,0 +1,51 @@
+.userauth{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    // height: 100vh;
+    .header-col{
+        color: #3687bb;
+    }
+    .nova{
+    font-size: 17px;
+    margin: 15px 0px;
+    }
+    h4{
+        color: #717171;
+        margin-bottom: 20px;
+    }
+    .user-staff{
+        border: 2px solid #3687bb;
+        width: 500px;
+        text-align: center;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        position: relative;
+        .fa-angle-right{
+            position: absolute;
+    right: 11px;
+    top: 11px;
+    font-size: 20px;
+        }
+    }
+    .fa-arrow-left{
+        background: #3687bb;
+    color: #fff;
+    padding: 15px;
+    border-radius: 50px;
+    font-size: 15px;
+    }
+   .powered{
+    color: #000;
+    margin: 20px 0px;
+    font-size: 15px;
+ 
+   }
+}
+@media (max-width: 767px) {
+    .user-staff{
+        width: 300px!important;
+    }
+}

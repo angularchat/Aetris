@@ -1,0 +1,21 @@
+<div class="col-md-12 m-b-30">
+    <app-card cardTitle="Attendance Report for {{monthName}}" [options]="false">
+      <div class="col-md-12 m-b-30">
+          <button class="btn btn-link" ngbtooltip="Change Month" type="button" (click)="calnderShowfn()">Change Month</button>
+
+        <ng-container *ngIf="calenderShow == true">
+              <input type="month" id="monthDefault" class="form-control" placeholder="Month"[value]="changedDate" (change)="changeDate($event)">
+        </ng-container>
+        <hr/>
+      </div>
+  
+      <div class="table-responsive">
+        <table
+          datatable
+          [dtOptions]="dtExportButtonOptions"
+          class="table table-striped row-border table-hover"
+        ></table>
+      </div>
+    </app-card>
+  </div>
+  

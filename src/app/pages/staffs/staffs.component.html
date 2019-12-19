@@ -1,0 +1,236 @@
+<div class="row">
+    <div class="col-sm-12" *ngIf="!loading">
+        <button type="button" class="btn btn-primary model-btn" (click)="delData(); addStaff.show(); this.submitted = false">Add Staffs</button>
+
+        <app-card cardTitle="Staffs" [options]="true">
+            <div class="table-responsive">
+                <table datatable class="table table-striped row-border table-hover" id="staffs-list">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th> Email</th>
+                            <th> Designation </th>
+                            <th>Shift Hours</th>
+                            <th>Salary Amount</th>
+                            <th>#</th>
+                            <th>#</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of staffData">
+                            <td>
+                                <span *ngIf="data?.staff_identity != '' && data.staff_identity != null;else notshow">{{data.staff_identity}}</span>
+                            </td>
+                            <td>
+                                <span *ngIf="data?.name != '' && data?.name != null;else notshow">{{data?.name}}</span>
+                                <ng-template #notshow> --- </ng-template>
+                            </td>
+                            <td>
+                                <span *ngIf="data?.email != '' && data?.email != null;else notshow">{{data?.email}}</span>
+                                <ng-template #notshow> --- </ng-template>
+                            </td>
+                            <td>
+                                <span *ngIf="data?.designation != '' && data?.designation != null;else notshow">{{data?.designation}}</span>
+                                <ng-template #notshow> --- </ng-template>
+                            </td>
+                            <td>
+                                <span *ngIf="data?.shifthours != '' && data?.shifthours != null;else notshow">{{data.shifthours}}</span>
+                                <ng-template #notshow> --- </ng-template>
+                            </td>
+                            <td>
+                                <span *ngIf="data?.salaryamount != '' && data?.salaryamount != null;else notshow">{{data.salaryamount}}</span>
+                            </td>
+                            <td>
+                                <span> <a class="cursorpointer edit" (click)="delData(); assignData(data); editStaff.show()"> Edit
+                  </a></span>
+                            </td>
+                            <td>
+                                <span (click)="delete.show()"> <i class="fa fa-trash" aria-hidden="true"></i> </span>
+                            </td>
+                            <ng-template #notshow> --- </ng-template>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </app-card>
+    </div>
+
+</div>
+<!-- add staff model starts -->
+<app-ui-modal #addStaff [dialogClass]="modal-dialog-centered">
+    <div class="app-modal-header">
+        <h5 class="modal-title">Add Staff</h5>
+        <button type="button" class="close basic-close" id="closemodal" data-dismiss="modal" aria-label="Close" (click)="delData(); addStaff.hide();"><span aria-hidden="true">&times;</span></button>
+    </div>
+
+    <div class="app-modal-body">
+        <form [formGroup]="addstaffForm" (ngSubmit)="onCreate(addStaff)">
+            <div class="col-md-12">
+                <div class="Clear-btn" *ngIf="url != null && url != ''">
+                    <button type="button" class="btn btn-primary" (click)="clearimage()">Clear</button>
+                </div>
+                <div class="wrapper">
+                    <div class="file-upload" *ngIf="url == null || url == ''">
+                        <input type="file" (change)="onSelectFile($event)" />
+                        <i class="fa fa-user-circle"></i>
+                    </div>
+                    <img [src]="url" *ngIf="url != null && url != ''" (error)="noImg();" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Name</label>
+                    <input type="text" formControlName="name" [(ngModel)]="model.name" class="mb-3 form-control form-control-lg" type="text" placeholder="" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+                    <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                        <div *ngIf="f.name.errors.required">Name is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Mobile Number</label>
+                    <input class="mb-3 form-control form-control-lg" [(ngModel)]="model.mobile_number" type="number" formControlName="phonum" placeholder="" [ngClass]="{ 'is-invalid': submitted && f.phonum.errors }">
+                    <div *ngIf="submitted && f.phonum.errors" class="invalid-feedback">
+                        <div *ngIf="f.phonum.errors.required">Mobile Number is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input class="mb-3 form-control form-control-lg" [(ngModel)]="model.email" type="email" formControlName="email" placeholder="" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">Email is required</div>
+                        <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Designation</label>
+                    <input class="mb-3 form-control form-control-lg" [(ngModel)]="model.designation" formControlName="designation" type="text" placeholder="" [ngClass]="{ 'is-invalid': submitted && f.designation.errors }">
+                    <div *ngIf="submitted && f.designation.errors" class="invalid-feedback">
+                        <div *ngIf="f.designation.errors.required">Designation is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Salary Amount</label>
+                    <input class="mb-3 form-control form-control-lg" [(ngModel)]="model.salary_amount" type="number" formControlName="salamount" placeholder="" [ngClass]="{ 'is-invalid': submitted && f.salamount.errors }">
+                    <div *ngIf="submitted && f.salamount.errors" class="invalid-feedback">
+                        <div *ngIf="f.salamount.errors.required">Salary Amount is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Shift working Hours</label>
+                    <input class="mb-3 form-control form-control-lg" [(ngModel)]="model.shift_hours" type="number" formControlName="workhours" placeholder="" [ngClass]="{ 'is-invalid': submitted && f.workhours.errors }">
+                    <div *ngIf="submitted && f.workhours.errors" class="invalid-feedback">
+                        <div *ngIf="f.workhours.errors.required">Working Hours is required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="save-btn">
+                <button class="btn btn-primary">Save changes</button>
+            </div>
+        </form>
+    </div>
+
+</app-ui-modal>
+<!-- add staff model ends -->
+<!-- edit staff starts -->
+<app-ui-modal #editStaff [dialogClass]="modal-dialog-centered">
+    <div class="app-modal-header">
+        <h5 class="modal-title">Edit Staff</h5>
+        <button type="button" class="close basic-close" id="closemodal" data-dismiss="modal" aria-label="Close" (click)="editStaff.hide(); delData()"><span aria-hidden="true">&times;</span></button>
+    </div>
+
+    <div class="app-modal-body">
+        <form [formGroup]="addstaffForm" (ngSubmit)="onUpdate(editStaff);">
+            <div class="col-md-12">
+                <div class="Clear-btn" *ngIf="url != null && url != ''">
+                    <button type="button" class="btn btn-primary" (click)="clearimage()">Clear</button>
+                </div>
+                <div class="wrapper">
+                    <div class="file-upload" *ngIf="url == null || url == ''">
+                        <input type="file" (change)="onSelectFile($event)" />
+                        <i class="fa fa-user-circle"></i>
+                    </div>
+                    <img [src]="url" (click)="enlargeimage()" data-lightbox="image-1" *ngIf="url != null && url != ''" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Name</label>
+                    <input type="text" formControlName="name" [(ngModel)]="model.name" class="mb-3 form-control form-control-lg" type="text" placeholder="" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+                    <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                        <div *ngIf="f.name.errors.required">Name is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Mobile Number</label>
+                    <input class="mb-3 form-control form-control-lg" [(ngModel)]="model.mobile_number" type="number" formControlName="phonum" placeholder="" [ngClass]="{ 'is-invalid': submitted && f.phonum.errors }">
+                    <div *ngIf="submitted && f.phonum.errors" class="invalid-feedback">
+                        <div *ngIf="f.phonum.errors.required">Mobile Number is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input class="mb-3 form-control form-control-lg" type="email" [(ngModel)]="model.email" formControlName="email" placeholder="" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">Email is required</div>
+                        <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Designation</label>
+                    <input class="mb-3 form-control form-control-lg" [(ngModel)]="model.designation" formControlName="designation" type="text" placeholder="" [ngClass]="{ 'is-invalid': submitted && f.designation.errors }">
+                    <div *ngIf="submitted && f.designation.errors" class="invalid-feedback">
+                        <div *ngIf="f.designation.errors.required">Designation is required</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Salary Amount</label>
+                    <input class="mb-3 form-control form-control-lg" type="number" [(ngModel)]="model.salary_amount" formControlName="salamount" placeholder="" [ngClass]="{ 'is-invalid': submitted && f.salamount.errors }">
+                    <div *ngIf="submitted && f.salamount.errors" class="invalid-feedback">
+                        <div *ngIf="f.salamount.errors.required">Salary Amount is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Shift working Hours</label>
+                    <input class="mb-3 form-control form-control-lg" type="number" [(ngModel)]="model.shift_hours" formControlName="workhours" placeholder="" [ngClass]="{ 'is-invalid': submitted && f.workhours.errors }">
+                    <div *ngIf="submitted && f.workhours.errors" class="invalid-feedback">
+                        <div *ngIf="f.workhours.errors.required">Working Hours is required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="save-btn">
+                <button class="btn btn-primary">Save changes</button>
+            </div>
+        </form>
+    </div>
+
+</app-ui-modal>
+<!-- edit staff ends -->
+<ng-container *ngIf="isenlargeimage == true">
+    <div class="lightbox">
+        <div class="imageenlarge">
+            <img id="myImg" [src]="url" class="hover-shadow cursor" />
+            <button type="button" (click)="closeenlargimg()" class="closelightbox basic-close"><span>&times;</span></button>
+
+        </div>
+    </div>
+</ng-container>
+<!-- delete model starts -->
+<app-ui-modal #delete [dialogClass]="modal-dialog-centered" class="delete" data-backdrop="static" data-keyboard="false">
+    <div class="app-modal-header">
+        <h5 class="modal-title">
+            Are you sure want to delete this staff ?.
+        </h5>
+        <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="delete.hide();"><span aria-hidden="true">&times;</span></button>
+    </div>
+    <div class="app-modal-body">
+        <a (click)="delete.hide();">Yes</a>
+        <a (click)="delete.hide();">No</a>
+    </div>
+</app-ui-modal>
+<!-- delete model ends -->
+
+
+<div class="loader" *ngIf="loading">
+    <div class="container">
+        <div class="triangle"></div>
+        <div class="triangle"></div>
+    </div>
+</div>

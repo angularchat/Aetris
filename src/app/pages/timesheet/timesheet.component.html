@@ -1,0 +1,163 @@
+<div class="col-md-12 m-b-30">
+  <app-card cardTitle="TimeSheets" [options]="false">
+    <div class="m-b-20">
+      <h6>Choose date</h6>
+      
+      <form class="form-inline" action="javascript:">
+          <div class="form-group">
+            <div class="input-group">
+              <input
+                class="form-control"
+                autocomplete="off"
+                placeholder="yyyy-mm-dd"
+                name="d"
+                [(ngModel)]="modelPopup"
+                ngbDatepicker
+                #d="ngbDatepicker"
+                (change)="selectDate($event)"
+              />
+              <div class="input-group-append">
+                <span class="input-group-text" (click)="d.toggle()">
+                  <i class="fa fa-calendar"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+        </form>
+        <hr/>
+    </div>
+
+    <div class="table-responsive">
+      <ng-container *ngIf="table == 'staffs' && !loading"> 
+        <table id="staffs" datatable class="table table-striped row-border table-hover">
+          <thead>
+          <tr>
+            <th> # Identity </th>
+            <th> Name </th>
+            <th>Check in time</th>
+            <th>Check out time</th>
+            <th>Check Date</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr  *ngFor ="let data of tiesheetsforstaffs">
+            <td>
+              <span *ngIf="data?.staff_identity != '' && data?.staff_identity != null;else notshow"> {{data?.staff_identity}} </span>
+                <ng-template #notshow> --- </ng-template>
+            </td>
+            <td>
+                <span *ngIf="data?.staff_name != '' && data?.staff_name != null;else notshow"> {{data?.staff_name}} </span>
+                  <ng-template #notshow> --- </ng-template>
+              </td>
+            <td> 
+              <span *ngIf="data?.check_in_time != '' && data?.check_in_time != null;else notshow">{{data?.check_in_time}}</span> 
+              <ng-template #notshow> --- </ng-template>
+            </td>
+            <td> 
+              <span *ngIf="data?.check_out_time != '' && data?.check_out_time != null;else notshow">{{data?.check_out_time}}</span> 
+              <ng-template #notshow> --- </ng-template>
+            </td>
+            <td>
+              <span *ngIf="data?.check_date != '' && data?.check_date != null;else notshow">{{data?.check_date}}</span>
+              <ng-template #notshow> --- </ng-template> 
+            </td>
+            <ng-template #notshow> --- </ng-template> 
+          </tr>
+          </tbody>
+        
+        </table>
+
+      </ng-container>
+      <ng-container *ngIf="table == 'guests' && !loading"> 
+
+
+          <table id="guests" datatable class="table table-striped row-border table-hover">
+              <thead>
+              <tr>
+                <th> # Identity </th>
+                <th> Name </th>
+                <th>Check in time</th>
+                <th>Check out time</th>
+                <th>Check Date</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr  *ngFor ="let data of tiesheetsforguests">
+                <td>
+                  <span *ngIf="data?.staff_identity != '' && data?.staff_identity != null;else notshow"> {{data?.staff_identity}} </span>
+                    <ng-template #notshow> --- </ng-template>
+                </td>
+                <td>
+                    <span *ngIf="data?.staff_name != '' && data?.staff_name != null;else notshow"> {{data?.staff_name}} </span>
+                      <ng-template #notshow> --- </ng-template>
+                  </td>
+                <td> 
+                  <span *ngIf="data?.check_in_time != '' && data?.check_in_time != null;else notshow">{{data?.check_in_time}}</span> 
+                  <ng-template #notshow> --- </ng-template>
+                </td>
+                <td> 
+                  <span *ngIf="data?.check_out_time != '' && data?.check_out_time != null;else notshow">{{data?.check_out_time}}</span> 
+                  <ng-template #notshow> --- </ng-template>
+                </td>
+                <td>
+                  <span *ngIf="data?.check_date != '' && data?.check_date != null;else notshow">{{data?.check_date}}</span>
+                  <ng-template #notshow> --- </ng-template> 
+                </td>
+                <ng-template #notshow> --- </ng-template> 
+              </tr>
+              </tbody>
+            
+            </table>
+
+      </ng-container>
+      <ng-container *ngIf="table == 'visitors' && !loading"> 
+
+          <table id="guests" datatable class="table table-striped row-border table-hover">
+              <thead>
+              <tr>
+                <th> # Identity </th>
+                <th> Name </th>
+                <th>Check in time</th>
+                <th>Check out time</th>
+                <th>Check Date</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr  *ngFor ="let data of tiesheetsforguests">
+                <td>
+                  <span *ngIf="data?.staff_identity != '' && data?.staff_identity != null;else notshow"> {{data?.staff_identity}} </span>
+                    <ng-template #notshow> --- </ng-template>
+                </td>
+                <td>
+                    <span *ngIf="data?.staff_name != '' && data?.staff_name != null;else notshow"> {{data?.staff_name}} </span>
+                      <ng-template #notshow> --- </ng-template>
+                  </td>
+                <td> 
+                  <span *ngIf="data?.check_in_time != '' && data?.check_in_time != null;else notshow">{{data?.check_in_time}}</span> 
+                  <ng-template #notshow> --- </ng-template>
+                </td>
+                <td> 
+                  <span *ngIf="data?.check_out_time != '' && data?.check_out_time != null;else notshow">{{data?.check_out_time}}</span> 
+                  <ng-template #notshow> --- </ng-template>
+                </td>
+                <td>
+                  <span *ngIf="data?.check_date != '' && data?.check_date != null;else notshow">{{data?.check_date}}</span>
+                  <ng-template #notshow> --- </ng-template> 
+                </td>
+                <ng-template #notshow> --- </ng-template> 
+              </tr>
+              </tbody>
+            
+            </table>
+      </ng-container>
+    </div>
+  </app-card>
+</div>
+
+<!-- <div class="loading" *ngIf="loading">Loading&#8230;</div> -->
+<div class="loader" *ngIf="loading">
+  <div class="container">
+    <div class="triangle"></div>
+    <div class="triangle"></div>
+  </div>
+</div>

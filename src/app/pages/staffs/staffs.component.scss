@@ -1,0 +1,333 @@
+.model-btn {
+    display: flex;
+    margin-left: auto;
+    margin-bottom: 15px;
+}
+
+ html{
+  height:100%;
+}
+
+body{
+  
+  background-color:#2590EB;
+  height:100%;
+}
+img{
+  max-width:200px;
+  width: 150px;
+  border: 1px solid #ddd;
+  height: 150px;
+  border-radius: 100px;
+  cursor: pointer;
+}
+.wrapper{
+  
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  
+
+  .file-upload{
+
+    height:100px;
+    width:100px;
+    border-radius: 100px;
+    position:relative;
+    
+    display:flex;
+    justify-content:center;
+    align-items: center;  
+
+    border:4px solid #FFFFFF;
+    overflow:hidden;
+    background-image: linear-gradient(to bottom, #2590EB 50%, #FFFFFF 50%);
+    background-size: 100% 200%;
+    transition: all 1s;
+    color: #FFFFFF;
+    font-size:100px;
+
+    input[type='file']{
+
+      height:100px;
+      width:100px;
+      position:absolute;
+      top:0;
+      left:0;
+      opacity:0;
+      cursor:pointer;
+      font-size: 0;
+
+    }
+
+    &:hover{
+
+      background-position: 0 -100%;
+
+      color:#2590EB;
+
+    }
+
+
+  }
+}
+.save-btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.Clear-btn{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  button{
+    padding: 0px 10px;
+    box-shadow: none;
+    margin: 0;
+  }
+}
+.close{
+  outline: none;
+}
+
+
+::ng-deep .edit{
+  background: #1797be;
+    color: #fff!important;
+    padding: 4px 10px;
+    font-size: 12px;
+}
+::ng-deep .fa-trash{
+  color: #ff0000;
+}
+// delete model
+.delete{
+  .modal-title{
+    color: #6a6c7c;
+  }
+  .app-modal-body{
+    text-align: center;
+    a{
+      padding: 5px 15px;
+      font-size: 13px;
+      margin-left: 8px;
+      background: #1797be;
+      color: #fff;
+      border-radius: 5px;
+    }
+  }
+}
+
+
+// loader
+
+$scale:2.3em;
+$speed:3s;
+$easing:cubic-bezier(0.645, 0.045, 0.355, 1);
+
+$bg: #c5f9e2;
+$color_1: #9ac3ec;
+$color_2: #3086da;
+
+.container{
+  position:absolute;
+  &:last-of-type{
+      z-index:-1;
+      margin:1%;
+      display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    }
+//   animation: rotate $speed linear infinite;
+}
+
+.triangle {
+	position: relative;
+	text-align: left;
+  transform-origin: 33.33% 66.66%;
+  
+  &:before,&:after {
+    content: '';
+    position: absolute;
+    background: inherit;
+  }
+  
+  &,&:before,&:after {
+    width:  $scale;
+    height: $scale;
+    border-top-right-radius: 20%;
+  }
+  
+  &:before{
+    transform: 
+      rotate(-135deg) 
+      skewX(-45deg) 
+      scale(1.414,.707) 
+      translate(0,-50%)
+  }
+  
+  &:after{
+    transform:
+      rotate(135deg)
+      skewY(-45deg)
+      scale(.707,1.414)
+      translate(50%)
+  }
+  
+  &:first-of-type{
+    background:$color_1;
+    transform:
+      rotate(-60deg)
+      skewX(-30deg)
+      scale(1,.866)
+      translate(143.33%, 110%);
+    animation: first $speed $easing infinite;
+  }
+  
+  &:last-of-type{
+    background:$color_2;
+    transform:
+      rotate(0deg)
+      skewX(-30deg)
+      scale(1,.866)
+      translate(-100%,-4%);
+    animation: last $speed $easing infinite;
+  }
+  
+  &.shadow {
+    &,&:before,&:after {
+      background:darken($bg,8);
+      backface-visibility: hidden;
+      perspective: 1000;
+      filter: blur(0.5em);
+    }
+  }
+}
+
+@keyframes rotate {
+  from{transform:rotate(0deg)}
+  to{transform:rotate(-360deg)}
+}
+
+@keyframes first {
+  0%{transform:
+      rotate(-60deg)
+      skewX(-30deg)
+      scale(1,.866)
+      translate(143.33%, 110%);}
+  33%{transform:
+      rotate(-60deg)
+      skewX(-30deg)
+      scale(1,.866)
+      translate(-76.67%, -120%);}
+  66%{transform:
+      rotate(-60deg)
+      skewX(-30deg)
+      scale(1,.866)
+      translate(-76.67%, 112%);}
+}
+
+@keyframes last {
+  0%{transform:
+      rotate(0deg)
+      skewX(-30deg)
+      scale(1,.866)
+      translate(-100%,-4%);}
+  33%{transform:
+      rotate(0deg)
+      skewX(-30deg)
+      scale(1,.866)
+      translate(134%,-4%);}
+  66%{transform:
+      rotate(0deg)
+      skewX(-30deg)
+      scale(1,.866)
+      translate(-89%,-214%);}
+}
+.loader{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #333;
+    opacity: 0.8;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+.imageenlarge{
+  position: absolute;
+  top: 0;
+  background: #fff;
+  right: 0;
+  left: 0;
+  bottom: 0; 
+  img{
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+  }
+  #myImg:hover{
+    opacity: 1;
+   
+  }
+  #myImg{
+    margin:0px;
+    border-radius: inherit;
+  }
+}
+
+.lightbox{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 10000;
+  background: rgba(0, 0, 0, 0.26);
+  height: 100vh;
+}
+.imageenlarge{
+  background: #fff;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  width: 800px;
+  padding: 15px;
+  height: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 25px;
+  border-radius: 5px;
+}
+
+  /* The Close Button */
+  .closelightbox {
+    position: absolute;
+    top: -40px;
+    right: -30px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    outline: none;
+    background-color: transparent;
+    border: none;
+  }
+  
+  .closelightbox:hover,
+  .closelightbox:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+  }

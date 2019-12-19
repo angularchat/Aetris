@@ -1,0 +1,96 @@
+﻿<div class="auth-wrapper">
+    <div class="auth-content">
+      <div class="auth-bg">
+        <span class="r"></span>
+        <span class="r s"></span>
+        <span class="r s"></span>
+        <span class="r"></span>
+      </div>
+      <div class="card">
+        <div class="card-body text-center">
+          <div class="">
+            <!-- <i class="feather icon-unlock auth-icon"></i> -->
+            <img _ngcontent-c5="" src="https://aetris.in/assets/favicon-b5cd7a3224e78d5ac775f7823ad4d1caf6a6509aa59bd679f6d73557417d4e25.png" style="width: 80px;">
+          </div>
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <h3 class="mb-4">Login</h3>
+          <div class="input-group mb-3">
+            <input type="email" formControlName="email" class="form-control" placeholder="Email"
+            [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+              <div *ngIf="f.email.errors.required">Email is required</div>
+              <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+            </div>
+          </div>
+          <div class="input-group mb-4">
+            <input type="password" formControlName="password" class="form-control" placeholder="Password"
+            [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+              <div *ngIf="f.password.errors.required">Password is required</div>
+            </div>
+          </div>
+          <div class="form-group text-left">
+            <div class="checkbox checkbox-fill d-inline">
+              <input type="checkbox" name="checkbox-fill-1" id="checkbox-fill-a1" checked="">
+              <label for="checkbox-fill-a1" class="cr"> Save Details</label>
+            </div>
+          </div>
+          <button class="btn btn-primary mb-4">Login</button>
+         </form>
+          <p class="mb-2 text-muted" (click)="ForgotPassword.show();">Forgot password? <a [routerLink]="['/auth/reset-password']">Reset</a></p>
+          <p class="mb-0 text-muted"(click)="Register.show();">Don’t have an account? <a [routerLink]="['/register']">Sign up</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <!-- <div class="loading" *ngIf="loading">Loading&#8230;</div> -->
+<div class="loader" *ngIf="loading">
+  <div class="container">
+    <div class="triangle"></div>
+    <div class="triangle"></div>
+  </div>
+</div>
+<!-- Forgot Password starts -->
+<app-ui-modal #ForgotPassword [dialogClass]="modal-dialog-centered" class="Forgot" data-backdrop="static" data-keyboard="false">
+  <div class="app-modal-header">
+    <h5 class="modal-title">
+     Forgot Your Password?
+    </h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+      (click)="ForgotPassword.hide();"><span aria-hidden="true">&times;</span></button>
+  </div>
+  <div class="app-modal-body"> 
+ <input type="email" class="form-control" placeholder="Email Address">
+  
+</div>
+<div class="app-modal-footer"> 
+  <button class="btn btn-primary mb-4">Send me reset password</button>
+</div>
+</app-ui-modal>
+<!-- Forgot Password ends -->
+
+<!-- Register starts -->
+<app-ui-modal #Register [dialogClass]="modal-dialog-centered" class="Forgot register" data-backdrop="static" data-keyboard="false">
+  <div class="app-modal-header">
+      <h5 class="modal-title">
+         Register
+         </h5>
+         <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+         (click)="Register.hide();"><span aria-hidden="true">&times;</span></button>
+  </div>
+  <div class="app-modal-body"> 
+ <input type="email" class="form-control reg-input" placeholder="Name">
+ <input type="email" class="form-control reg-input" placeholder="Email Address">
+ <input type="email" class="form-control reg-input" placeholder="Mobile Number">
+ <input type="email" class="form-control reg-input" placeholder="Password">
+  
+</div>
+<div class="app-modal-footer"> 
+  <button class="btn btn-primary mb-4">Register</button>
+  <p class="reg-already"> Already have an account?</p>
+  <button class="btn mb-4 reg-login">Login</button>
+</div>
+</app-ui-modal>
+<!-- Register ends -->

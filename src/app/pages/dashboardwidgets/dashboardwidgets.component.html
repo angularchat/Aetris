@@ -1,0 +1,105 @@
+<div class="row dashboard-bg">
+    <div class="col-md-12 col-xl-6">
+        <div class="card">
+            <div class="card-block">
+
+
+                <!-- dashboard -->
+                <div class="attendence-body">
+                    <div class="attendence">
+                        <h4>Attandence</h4>
+                        <a class="today">Today</a>
+                    </div>
+                    <div>
+                        <p style="margin: 10px 0px;">Total Employees <span style="padding-left: 20px">260</span></p>
+                    </div>
+
+                    <div class="row checkin">
+                        <div class=" col-xl-5 attendence-body check-in-col">
+                            <span>Check-in</span>
+                            <p class="count">106</p>
+                        </div>
+                        <div class=" col-xl-5 attendence-body check-out-col">
+                            <span style="font-size: 18px;">Check-out</span>
+                            <p class="count">106</p>
+                            <span>Forced Check-out</span>
+                            <p class="sub-count">50</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- dasboard -->
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12 col-xl-6">
+        <div class="card">
+            <div class="card-block">
+
+                <!-- dashboard -->
+                <div class="attendence-body">
+                    <div class="attendence">
+                        <h4>Visitors</h4>
+                        <a class="today">Today</a>
+                    </div>
+                    <div>
+                        <p style="margin: 10px 0px;">Total Registered Visitors <span style="padding-left: 20px">760</span></p>
+                    </div>
+
+                    <div class="row checkin">
+                        <div class=" col-xl-5 attendence-body check-in-col">
+                            <span>Check-in</span>
+                            <p class="count">106</p>
+                        </div>
+                        <div class=" col-xl-5 attendence-body check-out-col">
+                            <span style="font-size: 18px;">Check-out</span>
+                            <p class="count">106</p>
+                            <span>Forced Check-out</span>
+                            <p class="sub-count">50</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- dasboard -->
+
+            </div>
+        </div>
+    </div>
+    <!-- graph starts -->
+    <div class="col-md-12 col-xl-6">
+        <div class="card">
+            <div class="card-block">
+
+
+                <!-- dashboard  line chart 1 starts -->
+
+                <div mk-morris-js [options]="chartLineOptions" [data]="chartLineData" type="Line"></div>
+
+
+                <!-- dashboard  line chart 1 ends -->
+
+
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-xl-6">
+        <div class="card">
+            <div class="card-block">
+
+
+                <!-- dashboard  line chart 2 starts-->
+
+                <div mk-morris-js [options]="chartLineOptions" [data]="chartLineData" type="Line"></div>
+
+
+                <!-- dashboard  line chart 2 ends -->
+
+
+
+            </div>
+        </div>
+    </div>
+    <!-- graph ends -->
+</div>

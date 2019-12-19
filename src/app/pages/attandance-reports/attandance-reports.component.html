@@ -1,0 +1,114 @@
+
+
+<div class="col-md-12 m-b-30 stafftimesheet">
+  
+
+
+
+
+  <app-card cardTitle="" [options]="false">
+
+
+      <div class="m-b-20">
+          <h6>Choose date</h6>
+          
+          <form class="form-inline" action="javascript:">
+              <div class="form-group">
+                <div class="input-group">
+                  <input
+                    class="form-control"
+                    autocomplete="off"
+                    placeholder="yyyy-mm-dd"
+                    name="dp"
+                    [(ngModel)]="modelPopup"
+                    ngbDatepicker
+                    #d="ngbDatepicker"
+                    (change)="selectDate($event)"
+                  />
+                  <div class="input-group-append">
+                    <span class="input-group-text" (click)="d.toggle()">
+                      <i class="fa fa-calendar"></i>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <hr />
+        </div>
+    <div class="table-responsive">
+<!--           <table datatable [dtOptions]="dtExportButtonOptions" class="table table-striped row-border table-hover"></table>
+-->        <table datatable class="table table-striped row-border table-hover">
+<thead>
+<tr>
+  <th>&nbsp;</th>
+  <th>Days</th>
+  <th colspan="2">01-Nov-19</th>
+  <th colspan="2">02-Nov-19</th>
+  <th colspan="2">03-Nov-19</th>
+  <th colspan="2">04-Nov-19</th>
+  <th colspan="2">05-Nov-19</th>
+  <th colspan="2">06-Nov-19</th>
+  <th colspan="2">07-Nov-19</th>
+</tr>
+<tr class="odd">
+  <th>#</th>
+  <th >Name/Week</th>
+  <th>IN</th>
+  <th>Out</th>
+  <th>IN</th>
+  <th>Out</th>
+  <th>IN</th>
+  <th>Out</th>
+  <th>IN</th>
+  <th>Out</th>
+  <th>IN</th>
+  <th>Out</th>
+  <th>IN</th>
+  <th>Out</th>
+  <th>IN</th>
+  <th>Out</th>
+</tr>
+</thead>
+<tbody>
+<tr class="even">
+  <td>001</td>
+  <td>10.0</td>
+  <td>10.0</td>
+  <td>140</td>
+  <td>12.0</td>
+  <td>12.0</td>
+  <td>12.0</td>
+  <td>30,000</td>
+  <td>12.0</td>
+  <td>30,000</td>
+  <td>12.0</td>
+  <td>12.0</td>
+  <td>12.0</td>
+  <td>30,000</td>
+  <td>12.0</td>
+  <td>30,000</td>
+</tr>
+<tr>
+    <td>002</td>
+    <td>10.0</td>
+    <td>10.0</td>
+    <td>140	</td>
+    <td>10.0</td>
+    <td>12.0</td>
+    <td>12.0</td>
+    <td>12,000</td>
+    <td>12.0</td>
+  <td>30,000</td>
+  <td>12.0</td>
+  <td>12.0</td>
+  <td>12.0</td>
+  <td>30,000</td>
+  <td>12.0</td>
+  <td>30,000</td>
+  </tr>
+</tbody>
+</table>
+
+    </div>
+  </app-card>
+
